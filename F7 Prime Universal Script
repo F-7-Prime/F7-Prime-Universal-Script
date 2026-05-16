@@ -1,0 +1,812 @@
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+local main = Instance.new("Frame")
+main.Size = UDim2.fromOffset(0,0)
+main.Position = UDim2.fromScale(0.5,0.5)
+main.AnchorPoint = Vector2.new(0.5,0.5)
+main.BackgroundColor3 = Color3.fromRGB(10,10,10)
+main.Parent = screenGui
+
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(1,0,0,25)
+subtitle.Position = UDim2.new(0,0,0,70)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "Please reset your character when you click 'START'"
+subtitle.TextColor3 = Color3.fromRGB(180, 180, 180) 
+subtitle.TextTransparency = 0.3 
+subtitle.TextScaled = true
+subtitle.Font = Enum.Font.Gotham
+subtitle.Parent = main
+
+Instance.new("UICorner", main)
+
+local stroke = Instance.new("UIStroke", main)
+stroke.Color = Color3.fromRGB(255,0,0)
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1,0,0,65)
+title.BackgroundTransparency = 1
+title.Text = "🗼 F7 Prime 🗼"
+title.TextColor3 = Color3.fromRGB(255,0,0)
+title.TextScaled = true
+title.Parent = main
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0.7,0,0,50)
+button.Position = UDim2.new(0.15,0,0.6,0)
+button.Text = "START"
+button.BackgroundColor3 = Color3.fromRGB(200, 0, 30)
+button.TextColor3 = Color3.fromRGB(10,0,0)
+button.Parent = main
+
+Instance.new("UICorner", button)
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://92708987611847"
+sound.Parent = button
+
+TweenService:Create(main, TweenInfo.new(0.8), {
+Size = UDim2.fromOffset(450,260)
+}):Play()
+
+button.MouseButton1Click:Connect(function()
+sound:Play()
+
+local t = TweenService:Create(main, TweenInfo.new(0.4), {  
+	Size = UDim2.fromOffset(0,0)  
+})  
+t:Play()  
+
+t.Completed:Wait()  
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "🗼 F7 Prime 🗼",
+    Icon = "rocket", -- lucide icon. optional
+    Author = "By Louk - AZIKOBOMA", -- optional
+Theme = "Red",
+})
+Window:Tag({
+    Title = "v2.19",
+    Icon = "cloudy",
+    Color = Color3.fromHex("#ff3b3b"),
+    Radius = 0, -- from 0 to 13
+})
+        Window:Tag({
+    Title = "Universal Script",
+    Icon = "globe",
+    Color = Color3.fromHex("#f5c542"),
+    Radius = 0, -- from 0 to 13
+})
+        WindUI:Notify({
+    Title = "Welcome To F-7 Prime",
+    Content = "Enjoy the script for free!",
+    Duration = 5, -- 3 seconds
+    Icon = "moon",
+})
+local Tab = Window:Tab({
+    Title = "Info",
+    Icon = "badge-info", -- optional
+    Locked = false,
+}) 
+        local Paragraph = Tab:Paragraph({
+    Title = "Feedback - Information",
+    Desc = "Discord",
+    Color = "Red",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "clipboard-check",
+            Title = "User Discord",
+            Callback = function()
+                            setclipboard("https://discord.gg/TJRxM6qB")
+ end,
+        }
+    }
+})
+local Paragraph = Tab:Paragraph({
+    Title = "Feedback - Information",
+    Desc = "Roblox",
+    Color = "Red",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "rbxassetid://99979613150270",
+    ThumbnailSize = 185,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "clipboard-check",
+            Title = "User Roblox",
+            Callback = function()
+                            setclipboard("AZIKOBOMA")
+ end,
+        }
+    }
+})
+
+local Tab = Window:Tab({
+    Title = "Player",
+    Icon = "user-round", -- optional
+    Locked = false,
+})
+local player = game.Players.LocalPlayer
+local humanoid
+
+local function getHumanoid()
+	local character = player.Character or player.CharacterAdded:Wait()
+	humanoid = character:WaitForChild("Humanoid")
+end
+
+getHumanoid()
+player.CharacterAdded:Connect(getHumanoid)
+
+local Slider = Tab:Slider({
+	Title = "Speed",
+	Desc = "Change your speed",
+	Step = 1,
+	Value = {
+		Min = 20,
+		Max = 1000,
+		Default = 70,
+	},
+	Callback = function(value)
+		if humanoid then
+			humanoid.WalkSpeed = math.clamp(value, 20, 1000)
+		end
+	end
+})
+        local player = game.Players.LocalPlayer
+local humanoid
+
+local function getHumanoid()
+	local character = player.Character or player.CharacterAdded:Wait()
+	humanoid = character:WaitForChild("Humanoid")
+end
+
+getHumanoid()
+player.CharacterAdded:Connect(getHumanoid)
+
+local Slider = Tab:Slider({
+	Title = "Jump Power",
+	Desc = "Change your Power jump",
+	Step = 1,
+	Value = {
+		Min = 30,
+		Max = 500,
+		Default = 70,
+	},
+	Callback = function(value)
+		if humanoid then
+			humanoid.UseJumpPower = true -- 
+			humanoid.JumpPower = math.clamp(value, 30, 500)
+		end
+	end
+})
+local workspace = game:GetService("Workspace")
+
+local Slider = Tab:Slider({
+	Title = "Gravity",
+	Desc = "Change your Gravity",
+	Step = 1,
+	Value = {
+		Min = 0,
+		Max = 200,
+		Default = 196, 
+	},
+	Callback = function(value)
+		workspace.Gravity = value
+	end
+})
+local camera
+
+local function getCamera()
+	camera = workspace.CurrentCamera
+end
+
+getCamera()
+
+local Slider = Tab:Slider({
+	Title = "FOV",
+	Desc = "Change your view",
+	Step = 1,
+	Value = {
+		Min = 60,
+		Max = 120,
+		Default = 70,
+	},
+	Callback = function(value)
+		if camera then
+			camera.FieldOfView = math.clamp(value, 60, 120)
+		end
+	end
+})
+        local UIS = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+
+local infiniteJumpEnabled = false
+local connection
+
+local Toggle = Tab:Toggle({
+	Title = "Infinity Jump",
+	Desc = "Jump in air unlimited",
+	Icon = "wind",
+	Type = "Checkbox",
+	Value = false,
+
+	Callback = function(state)
+		infiniteJumpEnabled = state
+
+		if state then
+			connection = UIS.JumpRequest:Connect(function()
+				if infiniteJumpEnabled then
+					local character = player.Character
+					if character then
+						local humanoid = character:FindFirstChildOfClass("Humanoid")
+						if humanoid then
+							humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+						end
+					end
+				end
+			end)
+		else
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+		end
+	end
+})
+local Button = Tab:Button({
+    Title = "Reset",
+    Desc = "Reset your character",
+    Icon = "skull",
+    Locked = false,
+    Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+humanoid.Health = 0
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "Esp & Aimbot",
+    Icon = "crosshair", -- optional
+    Locked = false,
+})
+local Button = Tab:Button({
+    Title = "Player Viewer (Spectetor)",
+    Desc = "F7 Prime | Viewer",
+    Locked = false,
+    Callback = function()
+    -- Player Viewer
+loadstring(game:HttpGet("https://pastebin.com/raw/92B7vA85"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "FreeCam",
+    Desc = "F7 Prime | Freecam v9",
+    Locked = false,
+    Callback = function()
+    -- Freecam 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/F-7-Prime/freecam-script/refs/heads/main/Freecam%20V99?token=GHSAT0AAAAAAD3DT5YUMTZ5XTAS3IBIW7WU2PXYV3A"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Night Vision",
+    Desc = "F7 Prime | Night Vision",
+    Locked = false,
+    Callback = function()
+    -- Night vision
+loadstring(game:HttpGet("https://pastebin.com/raw/cePFnweY"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Esp & Aimbot & Hitbox Changer",
+    Desc = "F7 Prime | Visual & Aimbot All game",
+    Locked = false,
+    Callback = function()
+    -- Aimbot & Esp
+loadstring(game:HttpGet("https://pastebin.com/raw/CdWdn2Me"))()
+        -- ...
+    end
+})
+        local Button = Tab:Button({
+    Title = "Fly GUi v9",
+    Desc = "F7 Prime | Fly Gui",
+    Locked = false,
+    Callback = function()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ur777r/Fly-Gui-Script-/refs/heads/main/obfuscated_script-1775922894982.lua.txt"))()
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "Main",
+    Icon = "layout-grid", -- optional
+    Locked = false,
+})
+        local Button = Tab:Button({
+    Title = "Infinite Yield",
+    Desc = "Infinite Yield Fe v6.4.1",
+    Locked = false,
+    Callback = function()
+                    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        -- ...
+    end
+})
+        local Button = Tab:Button({
+    Title = "Anti-afk",
+    Desc = "Anti-afk , Your FPS & Ping",
+    Locked = false,
+    Callback = function()
+                    -- Anti afk
+loadstring(game:HttpGet("https://raw.githubusercontent.com/evxncodes/mainroblox/main/anti-afk"))()
+        -- ...
+    end
+})
+        local Button = Tab:Button({
+    Title = "Invisible V2",
+    Desc = "It works on most games",
+    Locked = false,
+    Callback = function()
+                    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fe-invisible-V2-51608"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "TP-Tool",
+    Desc = "Click to teleport",
+    Locked = false,
+    Callback = function()
+                    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Teleport-Tools-34066"))()
+        -- ...
+    end
+})
+        local Button = Tab:Button({
+    Title = "Rejoin",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+                    local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+
+TeleportService:TeleportToPlaceInstance(
+	game.PlaceId,
+	game.JobId,
+	player
+)
+        -- ...
+    end
+})
+        local Button = Tab:Button({
+    Title = "Hop server",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+                    local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+
+TeleportService:Teleport(game.PlaceId, player)
+        -- ...
+    end
+})
+        local Section = Window:Section({
+    Title = "Game scripts",
+    Icon = "gamepad-2",
+    Opened = true,
+})
+        local Tab = Window:Tab({
+    Title = "Brookhaven RP",
+    Icon = "house", -- optional
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "HX-Hexagon",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-HX-Hexagon-Client-90722"))()
+        -- ...
+    end
+})
+    
+    local Button = Tab:Button({
+    Title = "Lyra Hub",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Lyra-Hub-New-170128"))()
+        -- ...
+    end
+})
+
+local Button = Tab:Button({
+    Title = "Coquette Hub",
+    Desc = "🔓 Keyless Script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Coquette-Hub-41921"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Cartola Hub",
+    Desc = "🔒 Key System (Best!)",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Cartola-Hub-47454"))()
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "Blox Fruit",
+    Icon = "apple", -- optional
+    Locked = false,
+})
+local Button = Tab:Button({
+    Title = "Quantum Onyx",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    -- Quantum onyx 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Gravity Hub",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    -- Gravity Hub 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Teddy Hub",
+    Desc = "🔓 Keyless script (Freemuim)",
+    Locked = false,
+    Callback = function()
+    -- Teddy hub
+repeat task.wait() until game:IsLoaded() and game:GetService("Players") and game.Players.LocalPlayer and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TEDDYHUB-FREEMIUM"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Axon Hub",
+    Desc = "🔒 Key System (Best!)",
+    Locked = false,
+    Callback = function()
+    -- Axon Hub 
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf72141537a85458e5a7.lua"))()
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "99 Night in forest",
+    Icon = "trees", -- optional
+    Locked = false,
+})
+local Button = Tab:Button({
+    Title = "Voidware",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/99-Nights-in-the-Forest-Voidware-99-NIGHTS-ON-THE-FOREST-133536"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "H4x Hub",
+    Desc = "🔒 Key system (Very Op)",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://H4xScripts.xyz/loader"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "I will add more next update. 🔔",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+-- Hey
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "Evade",
+    Icon = "dice-4", -- optional
+    Locked = false,
+})
+local Button = Tab:Button({
+    Title = "Algol",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/marcelosero7-cyber/Algolevade/refs/heads/main/obfuscated.lua%20(15).txt"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Idk He changes his name every time",
+    Desc = "🔓 keyless script (best!)",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/wrestonbest/Luminary-2025/refs/heads/main/Scripts/Main%20Loader.lua'))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Neuron-X",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    -- https://scriptblox.com/script/Universal-Script-Neuron-X-23790
+
+-- (Copy All) --
+
+-- Configs Here --
+GG=getgenv and getgenv()or _G or shared;GG.LoopLoading=false;
+
+-- Script Here -- 
+srcName="https://raw.githubusercontent.com/Yumiara/CPP/refs/heads/main/Main.cpp"
+
+-- Don't Change
+repeat ONERUN1,ONERUN2=pcall(function()Iden=nil;pcall(function()Iden=identifyexecutor()end)GG=getgenv and getgenv()or _G or shared;GG.HttpsSer=game.GetService(game,"HttpService")function EnCodeJ(a)return GG.HttpsSer:JSONEncode(a)end;function DeCodeJ(a)return GG.HttpsSer:JSONDecode(a)end;if not isfolder("NeuronXS")then makefolder("NeuronXS")end;repeat task.wait(0.7)until isfolder("NeuronXS")GG.ALLVersion=readfile and isfile and(isfile("NeuronXSVersion.json")and readfile("NeuronXSVersion.json"))and DeCodeJ(readfile("NeuronXSVersion.json"))or{["MagicCity"]=true}APISource=isfile("NeuronXS/Main.lua")and readfile("NeuronXS/Main.lua")or nil;if GG.ALLVersion["Main"]==nil or tick()-tonumber(GG.ALLVersion["Main"])>=600 or GG.ALLVersion["Main"]==nil or not APISource or not isfile("NeuronXSVersion.json")then SourceXS=game.HttpGet(game,srcName)writefile("NeuronXS/Main.lua",SourceXS)GG.ALLVersion["Main"]=tostring(tick())ContentsXSV=EnCodeJ(GG.ALLVersion)writefile("NeuronXSVersion.json",ContentsXSV)warn("[Neuron X] : Loaded Main from github via auto update")loadstring(SourceXS)()else if APISource then warn("[Neuron X] : Loaded Main from device and NOT github")loadstring(APISource)()end end end)if ONERUN1 then break else warn(ONERUN2)SourceXS=game.HttpGet(game,srcName)writefile("NeuronXS/Main.lua",SourceXS)GG.ALLVersion["Main"]=tostring(tick())ContentsXSV=EnCodeJ(GG.ALLVersion)writefile("NeuronXSVersion.json",ContentsXSV)warn("[Neuron X] : Loaded Main from github via Error Execution")loadstring(SourceXS)()end;task.wait(5)until not GG.LoopLoading
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "Murder Mastery 2",
+    Icon = "sword", -- optional
+    Locked = false,
+})
+local Button = Tab:Button({
+    Title = "Wym's Hub'",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/spawnerscript/WymsHub/refs/heads/main/MM2.lua"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Exodus Hub",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/script-9209/roblox/refs/heads/main/mm2-keyless-auto"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "YARHIM",
+    Desc = "🔓 Keyless script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-YARHM-12403"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "3 MM2 Hubs",
+    Desc = "❕ Unknow ",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptjame/mm2/refs/heads/main/bawe.lua", true))()
+        -- ...
+    end
+})
+local Section = Window:Section({
+    Title = "",
+    Icon = "table-of-contents",
+    Opened = false,
+})
+local Tab = Window:Tab({
+    Title = "more scripts",
+    Icon = "file-code-corner", -- optional
+    Locked = false,
+})
+local Button = Tab:Button({
+    Title = "free shift lock",
+    Desc = "shiftlock like Pc players",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Shift-Lock-Free-20626"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Fe Emote 7yd7",
+    Desc = "Best one withoot bugs",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-7yd7-I-Emote-Script-48024"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Fe Silly Car",
+    Desc = "Transforming into a car",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-SILLY-CAR-V1-48227"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Super Ring Player (MODE)",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-SUPER-RING-MOD-57173"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Bring Part V2",
+    Desc = "Fling With Parts",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Bring-Parts-V2-28529"))()
+    
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Flash Back script",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Flashback-Script-26745"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Fe emote",
+    Desc = "Its good",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/eCpipCTH"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "R6 changer",
+    Desc = "Change your body type",
+    Locked = false,
+    Callback = function()
+    -- Made by Izekai
+ 
+-- Instances:
+ 
+local ScreenGui = Instance.new("ScreenGui")
+local R6 = Instance.new("TextButton")
+local TextButton = Instance.new("TextButton")
+ 
+--Properties:
+ 
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ 
+R6.Name = "R6"
+R6.Parent = ScreenGui
+R6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+R6.Position = UDim2.new(-0.000343383319, 0, 0.32815966, 0)
+R6.Size = UDim2.new(0, 29, 0, 29)
+R6.Font = Enum.Font.SourceSans
+R6.Text = "R6"
+R6.TextColor3 = Color3.fromRGB(0, 0, 0)
+R6.TextSize = 14.000
+R6.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet(('https://pastebin.com/raw/jHGVauVX'),true))()
+end)
+ 
+TextButton.Parent = ScreenGui
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.Position = UDim2.new(0, 0, 0.414634138, 0)
+TextButton.Size = UDim2.new(0, 72, 0, 27)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Respawn"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 14.000
+TextButton.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet(('https://pastebin.com/raw/ukFZuXbb'),true))()
+end)
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Reaction Changer (fe)",
+    Desc = "Change your facial expression",
+    Locked = false,
+    Callback = function()
+    -- fe reaction
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Gaze-stuff/refs/heads/main/Mood'))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Fe Animation Afem Max",
+    Desc = "Best Animation Script",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-AFEM-Max-Open-Alpha-50210"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Avatar Changer",
+    Desc = "Change Your avatar",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-UNIVERSAL-AVATAR-CHANGER-OPEN-SOURCE-88368"))()
+        -- ...
+    end
+})
+local Button = Tab:Button({
+    Title = "Roships",
+    Desc = "I like this script",
+    Locked = false,
+    Callback = function()
+    if "you wanna use rochips universal" then
+	local z_x,z_z="gzrux646yj/raw/main.ts","https://glot.io/snippets/"
+	local im,lonely,z_c=task.wait,game,loadstring
+	z_c(lonely:HttpGet(z_z..""..z_x))()
+	return ("This will load in about 2 - 30 seconds" or "according to your device and executor")
+end
+
+
+        -- ...
+    end
+})
+local Tab = Window:Tab({
+    Title = "Next Update 🔔",
+    Icon = "bell", -- optional
+    Locked = false,
+})
+local Paragraph = Tab:Paragraph({
+    Title = "What should I do in the next update? ",
+    Desc = "- More Game Hubs - More Scripts - Op Aimbot for Blox fruit ...",
+    Color = "White",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+   
+})
+local Paragraph = Tab:Paragraph({
+    Title = "Don't forget to follow me to receive all the latest updates :P",
+    Desc = "All my information in info tab",
+    Color = "White",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+   
+})
+end)
